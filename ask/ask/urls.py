@@ -1,5 +1,5 @@
 from django.urls import path
-from ask.qa import views
+from qa import views
 from django.contrib import admin
 
 urlpatterns = [
