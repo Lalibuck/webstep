@@ -1,6 +1,6 @@
 CONFIG = {
-    'mode': 'wsgi',
-    'working_dir': '/home/box/web/ask/ask/',
+    #'mode': 'wsgi',
+    'working_dir': '/home/box/web/ask/ask',
 
     'args': (
         '--bind=0.0.0.0:8000',
@@ -8,6 +8,6 @@ CONFIG = {
         '--error-logfile err.log',
         '--workers=2',
         '--timeout=60',
-        'wsgi',
+        'ask.wsgi',
         ),
     }
