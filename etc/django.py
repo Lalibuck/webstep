@@ -8,6 +8,6 @@ CONFIG = {
         '--error-logfile err.log',
         '--workers=2',
         '--timeout=60',
-        'ask.wsgi',
+        'wsgi',
         ),
     }
