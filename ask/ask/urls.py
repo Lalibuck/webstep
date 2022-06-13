@@ -4,7 +4,7 @@ from django.contrib import admin
 
 urlpatterns = [
     path('/admin', admin.site.urls),
-    path('/', views.test),
+    path('', views.test),
     path('login/', views.test),
     path('signup/', views.test),
     path('question/<int:id>/', views.test),
