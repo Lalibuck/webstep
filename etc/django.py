@@ -1,13 +1,4 @@
-CONFIG = {
-    #'mode': 'wsgi',
-    'working_dir': '/home/box/web/ask/ask',
-
-    'args': (
-        '--bind=0.0.0.0:8000',
-        '--access-logfile acc.log',
-        '--error-logfile err.log',
-        '--workers=2',
-        '--timeout=60',
-        'ask.wsgi',
-        ),
-    }
+bind = '0.0.0.0:8000'
+pythonpath = '/home/box/web/ask'
+workers = 16
+timeout = 60
