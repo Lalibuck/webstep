@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
+
 
 class QuestionManager(models.Manager):
 
@@ -19,6 +21,13 @@ class Question(models.Model):
     author = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     likes = models.ManyToManyField(User, null=True, related_name='liking_question_user')
 
+    def get_url(self):
+        return reverse('question', kwargs={'id': self.pk})
+
+    def __str__(self):
+        return self.title
+
+
 class Answer(models.Model):
 
     text = models.TextField(null=True)
@@ -26,5 +35,6 @@ class Answer(models.Model):
     question = models.ForeignKey(Question, null=True, on_delete=models.CASCADE)
     author = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
 
-
+    def __str__(self):
+        return self.title
 
