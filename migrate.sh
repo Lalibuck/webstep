@@ -1,2 +1,2 @@
-python3 ~/ask/manage.py makemigrations qa
-python3 ~/ask/manage.py migrate
+python3 ~/ask/qa/manage.py makemigrations qa
+python3 ~/ask/qa/manage.py migrate
