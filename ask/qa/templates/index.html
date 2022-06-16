@@ -8,7 +8,7 @@
 <div>
 {% for question in questions %}
     <li>
-        question.title
+        {{ question.title }}
         <a href="{{ question.get_url }}">
         {{ question.get_url }}</a>
     </li>

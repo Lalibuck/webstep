@@ -5,18 +5,17 @@
     <title>Question</title>
 </head>
 <body>
-<h1>
+    <h1>
     {{ question }}
+    </h1>
+    <h2>
     {{ question.text}}
-</h1>
-<div>
     {% for answer in answers %}
+    </h2>
     <li>
-        <p> {{ answer }} -- {{ answer.added_at}}</p>
-        <p> {{ answer.text }} </p>
+        <p> {{ answer }} </p>
     </li>
     {% endfor %}
     </ul>
-</div>
 </body>
 </html>

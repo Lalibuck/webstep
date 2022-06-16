@@ -29,7 +29,6 @@ def main(request):
     question = models.Question.objects.new()
     page, paginator = paginate(request, question)
     paginator.baseurl = '/?page='
-    page = paginator.page(page)
     return render(request, 'index.html', {
         'name': 'New',
         'questions': page.object_list,
@@ -40,7 +39,6 @@ def popular(request):
     questions = models.Question.objects.popular()
     page, paginator = paginate(request, questions)
     paginator.baseurl = '/popular/?page='
-    page = paginator.page(page)
     return render(request, 'index.html', {
         'name': 'Popular',
         'questions': page.object_list,
@@ -52,6 +50,6 @@ def question(request, id):
     answer = models.Answer.objects
     answer = answer.filter(question=question.pk)
     return render(request, 'question.html', {
-        'questions': question,
+        'question': question,
         'answers': answer,
     })
