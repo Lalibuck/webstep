@@ -1,7 +1,7 @@
 from django.core.paginator import Paginator, EmptyPage
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, get_object_or_404
-from models import Question, Answer
+from . import models
 
 
 def test(request, *args, **kwargs):
@@ -26,7 +26,7 @@ def paginate(request, qs):
     return page, paginator
 
 def main(request):
-    question = Question.objects.new()
+    question = models.Question.objects.new()
     page, paginator = paginate(request, question)
     paginator.baseurl = '/?page='
     page = paginator.page(page)
@@ -37,7 +37,7 @@ def main(request):
     })
 
 def popular(request):
-    questions = Question.objects.popular()
+    questions = models.Question.objects.popular()
     page, paginator = paginate(request, questions)
     paginator.baseurl = '/popular/?page='
     page = paginator.page(page)
@@ -48,8 +48,8 @@ def popular(request):
     })
 
 def question(request, id):
-    question = get_object_or_404(Question, pk=id)
-    answer = Answer.objects
+    question = get_object_or_404(models.Question, pk=id)
+    answer = models.Answer.objects
     answer = answer.filter(question=question.pk)
     return render(request, 'question.html', {
         'questions': question,
