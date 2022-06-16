@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ name }}</title>
+</head>
+<body>
+<div>
+{% for question in questions %}
+    <li>
+        question.title
+        <a href="{{ question.get_url }}">
+        {{ question.get_url }}</a>
+    </li>
+    {% endfor %}
+    </ul>
+</div>
+<nav><ul class="pagination">
+{% for p in paginator.page_range %}
+    <li>
+    <a href="{{ paginator.baseurl }}{{ p }}">
+    {{ p }}</a>
+    </li>
+    {% endfor %}
+    </ul></nav>
+</body>
+</html>

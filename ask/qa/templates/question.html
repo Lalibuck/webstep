@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Question</title>
+</head>
+<body>
+<h1>
+    {{ question }}
+    {{ question.text}}
+</h1>
+<div>
+    {% for answer in answers %}
+    <li>
+        <p> {{ answer }} -- {{ answer.added_at}}</p>
+        <p> {{ answer.text }} </p>
+    </li>
+    {% endfor %}
+    </ul>
+</div>
+</body>
+</html>
