@@ -61,7 +61,7 @@ def question(request, id):
         question = get_object_or_404(models.Question, pk=id)
         answer = models.Answer.objects
         answer = answer.filter(question=question.pk)
-        form = forms.AnswerForm(initial={'question': question.id})
+        form = forms.AnswerForm(initial={'question': question.pk})
         return render(request, 'question.html', {
             'question': question,
             'answers': answer,
