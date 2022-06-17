@@ -2,23 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Question</title>
+    <title>Ask question</title>
 </head>
 <body>
-    <h1>
-    {{ question }}
-    </h1>
-    <h2>
-    {{ question.text}}
-    {% for answer in answers %}
-    </h2>
-    <li>
-        <p> {{ answer }} </p>
-    </li>
-    {% endfor %}
-    </ul>
-    <form method="post" action="/question/{{ question.pk }}/">
-        {% csrf_token %}
+<form method="post" action="/ask/">
+    {% csrf_token %}
     <fieldset>
         {% for field in form %}
             <div class="control-group
