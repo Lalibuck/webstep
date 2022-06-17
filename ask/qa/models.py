@@ -35,8 +35,6 @@ class Answer(models.Model):
     question = models.ForeignKey(Question, null=True, on_delete=models.CASCADE)
     author = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
 
-    def get_url(self):
-        return reverse('question', kwargs={'id': self.question})
 
     def __str__(self):
         return self.text

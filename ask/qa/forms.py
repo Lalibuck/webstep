@@ -14,7 +14,7 @@ class AskForm(forms.Form):
     title = forms.CharField(label='title', max_length=100)
     text = forms.CharField(label='text', widget=forms.Textarea)
 
-    def clean(self):
+    def clean_ask(self):
         title = self.cleaned_data['title']
         if not is_valid(title):
             raise forms.ValidationError(
@@ -23,23 +23,23 @@ class AskForm(forms.Form):
         return title
 
     def save(self):
-        ask = models.Question()
-        ask.save()
-        return ask
+        question = models.Question(**self.cleaned_data)
+        question.save()
+        return question
 
 class AnswerForm(forms.Form):
-    text = forms.CharField()
+    text = forms.CharField(label='text', widget=forms.Textarea)
     question = forms.IntegerField(label='question')
 
-    def clean(self):
-        question = self.cleaned_data['question']
-        if not is_digit(question):
-            raise forms.ValidationError(
-                u'Некорректные данные'
-            )
+    def clean_question(self):
+        question_id = self.cleaned_data['question']
+        try:
+            question = models.Question.objects.get(id=question_id)
+        except models.Question.DoesNotExist:
+            question = None
         return question
 
     def save(self):
-        ask = models.Answer()
-        ask.save()
-        return ask
+        answer = models.Answer(**self.cleaned_data)
+        answer.save()
+        return answer

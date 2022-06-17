@@ -47,11 +47,15 @@ def popular(request):
     })
 
 def question(request, id):
+    try:
+        q = models.Question.objects.get(id=id)
+    except models.Question.DoesNotExist:
+        raise Http404
     if request.method == "POST":
         form = forms.AnswerForm(request.POST)
         if form.is_valid():
             post = form.save()
-            url = post.get_url()
+            url = q.get_url()
             return HttpResponseRedirect(url)
     else:
         question = get_object_or_404(models.Question, pk=id)
