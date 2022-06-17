@@ -58,8 +58,15 @@ def question(request, id):
             url = q.get_url()
             return HttpResponseRedirect(url)
         else:
-            url = q.get_url()
-            return HttpResponseRedirect(url)
+            question = get_object_or_404(models.Question, pk=id)
+            answer = models.Answer.objects
+            answer = answer.filter(question=question.pk)
+            form = forms.AnswerForm()
+            return render(request, 'question.html', {
+                'question': question,
+                'answers': answer,
+                'form': form
+            })
     else:
         question = get_object_or_404(models.Question, pk=id)
         answer = models.Answer.objects
