@@ -1,3 +1,5 @@
+
+from django.contrib.auth import authenticate, login
 from django.core.paginator import Paginator, EmptyPage
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
@@ -53,6 +55,7 @@ def question(request, id):
         raise Http404
     if request.method == "POST":
         form = forms.AnswerForm(request.POST)
+        form._user = request.user
         if form.is_valid():
             _ = form.save()
             url = q.get_url()
@@ -81,6 +84,7 @@ def question(request, id):
 def question_add(request):
     if request.method == "POST":
         form = forms.AskForm(request.POST)
+        form._user = request.user
         if form.is_valid():
             post = form.save()
             url = post.get_url()
@@ -94,3 +98,45 @@ def question_add(request):
     return render(request, 'ask.html', {
             'form': form
     })
+
+def signup(request):
+    if request.method == 'POST':
+        form = forms.UserCreation(request.POST)
+        if form.is_valid():
+            post = form.save()
+            return log_in(request)
+        else:
+            return render(request, 'signup.html', {
+                    'form': form
+            })
+    else:
+        form = forms.UserCreation()
+    return render(request, 'signup.html', {
+        'form': form
+    })
+
+
+def log_in(request):
+    error = ''
+    if request.method == 'POST':
+        form = forms.LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return HttpResponseRedirect('/')
+            else:
+                error = u'Неверный логин / пароль (is None){}'.format(user)
+                return render(request, 'login.html', {'form': form,
+                                                  'error': error})
+        else:
+            error = u'Неверный логин / пароль (is not valid)'
+            return render(request, 'login.html', {'form': form,
+                                                          'error': error})
+    else:
+        form = forms.LoginForm()
+        return render(request, 'login.html', {'form': form,
+                                              'error': error})
+

@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Ask question</title>
+    <title>Login</title>
 </head>
 <body>
-<form method="post" action="/ask/">
+<form method="post" action=".">
     {% csrf_token %}
     <fieldset>
+        {% if error %} {{error}} {%endif%}
         {% for field in form %}
             <div class="control-group
                 {% if field.errors %}has-error{% endif %}">
@@ -18,7 +19,7 @@
     </fieldset>
     <div class="form-actions">
         <button type="submit" class="btn btn-primary">
-        Save</button>
+        Login</button>
     </div>
 </form>
 </body>
