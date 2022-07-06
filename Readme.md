@@ -1,7 +1,7 @@
 Project description:
------project 'webstep-------
+-----project 'webstep'-------
 
-The projects was created by using Python 3.8, Sqlite3 and Django
+The project was created by using Python 3.8, Sqlite3 and Django
 
-The projects is part of Stepic course "Web-technology"
+The project is part of Stepic course "Web-technology"
 
